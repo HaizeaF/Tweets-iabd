@@ -55,3 +55,13 @@ class dbContext:
         except Exception as error:
             logging.error(error)
             self.server.stop()
+            
+    def dbReach(self):
+        try:
+            self.openConnection()
+            self.client.admin.command('ping')
+            logging.info("Ping reached the Virtual Machine")
+        except Exception as error:
+            logging.info("Ping did not reach the Virtual Machine")
+            logging.error(error)
+            self.server.stop()
