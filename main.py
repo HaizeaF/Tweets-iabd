@@ -1,6 +1,8 @@
 from database.dbContext import *
 from pyspark.sql import SparkSession
 from pyspark.streaming import StreamingContext
+import pandas as pd
+import numpy as np
 
 def main():
     # Importar base de datos json a MongoDB
@@ -10,15 +12,32 @@ def main():
     
     # Leer fichero json de una ruta
     # Configura la sesión de Spark
-    try: 
-        spark = SparkSession.builder.appName("Intervalo1Segundo").getOrCreate()
+    try:
+        # Configura la sesión de Spark
+        spark = SparkSession.builder.master("local[2]").appName("tweetsCadaSegundo").getOrCreate()
 
-        # Lee el archivo completo como un conjunto de datos estático
-        lines = spark.read.text("database/dataset/test.json")
+        # Configura el contexto de streaming con intervalos de 1 segundo
+        ssc = StreamingContext(spark.sparkContext, 1)
 
-        print(lines[0])
-        # Muestra las líneas
-        lines.show()
+        # Lee el directorio como un flujo de texto
+        lines = ssc.textFileStream("database/dataset/test2.json")
+
+        # Define una función para imprimir cada RDD
+        def print_full_data(rdd):
+            # Convierte cada línea JSON a un objeto Python
+            json_objects = rdd.map(json.loads)
+            
+            print("hola")
+            # Imprime cada objeto JSON
+            for obj in json_objects.collect():
+                print(obj)
+
+        # Aplica la función a cada RDD del DStream
+        lines.foreachRDD(print_full_data)
+
+        # Inicia el proceso de streaming
+        ssc.start()
+        ssc.awaitTermination(5)
     except Exception as error:
         logging.error(error)
 
