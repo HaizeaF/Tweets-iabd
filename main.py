@@ -1,45 +1,45 @@
 from database.dbContext import *
 from pyspark.sql import SparkSession
-from pyspark.streaming import StreamingContext
-import pandas as pd
-import numpy as np
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
 
-def main():
-    # Importar base de datos json a MongoDB
-    # db = dbContext()
-    # db.dbReach()
-    # db.importFile('database/tweets.json','tweetsRetoDb','tweets')
-    
-    # Leer fichero json de una ruta
-    # Configura la sesión de Spark
-    try:
+# Pyspark
+def pyspark():
+    try :
         # Configura la sesión de Spark
-        spark = SparkSession.builder.master("local[2]").appName("tweetsCadaSegundo").getOrCreate()
+        spark = (
+            SparkSession.builder
+            .master("local[*]")
+            .appName("leerDatos")
+            .getOrCreate())
+        
+        # Crear esquema
+        schema = StructType([
+            StructField("id", IntegerType(), True),
+            StructField("nombre", StringType(), True)
+        ])
+        
+        # schema2 = StructType([
+        #     StructField("id", IntegerType(), True),
+        #     StructField("nombre", StringType(), True),
+        #     StructField("valor", FloatType(), True)
+        # ])
 
-        # Configura el contexto de streaming con intervalos de 1 segundo
-        ssc = StreamingContext(spark.sparkContext, 1)
-
-        # Lee el directorio como un flujo de texto
-        lines = ssc.textFileStream("database/dataset/test2.json")
-
-        # Define una función para imprimir cada RDD
-        def print_full_data(rdd):
-            # Convierte cada línea JSON a un objeto Python
-            json_objects = rdd.map(json.loads)
-            
-            print("hola")
-            # Imprime cada objeto JSON
-            for obj in json_objects.collect():
-                print(obj)
-
-        # Aplica la función a cada RDD del DStream
-        lines.foreachRDD(print_full_data)
-
-        # Inicia el proceso de streaming
-        ssc.start()
-        ssc.awaitTermination(5)
+        # Leer datos en streaming con el esquema y directorio definido
+        DF = (
+            spark.readStream
+            .format("json")
+            .schema(schema)
+            .load("database\dataset\input"))
+        
+        # Mostrar datos por consola
+        query = DF.writeStream.format("console").start()
+        query.awaitTermination()
+        
     except Exception as error:
         logging.error(error)
 
+def main():
+    pyspark()
+    
 if __name__ == '__main__':
     main()
