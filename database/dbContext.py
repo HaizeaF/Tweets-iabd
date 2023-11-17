@@ -35,7 +35,7 @@ class dbContext:
             logging.error(error)
             self.server.stop()
 
-    def importFile(self, filename='database\tweets.json', dbname='tweetsRetoDb', collection='tweets'):
+    def importFile(self, file=open('database/test.json'), dbname='tweetsRetoDb', collection='tweets'):
         try:
             self.openConnection()
             db = self.client[dbname]
@@ -43,8 +43,7 @@ class dbContext:
             self.client.admin.command('ping')
             logging.info("Pinged your deployment. You successfully connected to MongoDB!")
             
-            with open(filename) as file:
-                file_tweets = json.load(file)
+            file_tweets = json.loads(file) if isinstance(file,str) else json.load(file)
             
             if isinstance(file_tweets, list):
                 collection.insert_many(file_tweets)
