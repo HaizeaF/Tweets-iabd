@@ -5,10 +5,7 @@ import logging
 def main():
     try:
         context = dbContext()
-        dc = dataCleaner()
-        
-        cleanedJson = dc.cleanData()
-        context.importFile(file=cleanedJson,collection='cleanedTweetsTest')
+        context.importFile()
     except Exception as error:
         logging.error(error)
         
