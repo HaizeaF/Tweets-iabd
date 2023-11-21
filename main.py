@@ -2,8 +2,6 @@ from database.dbContext import *
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
 from hdfs import InsecureClient
-import pandas as pd
-import json
 
 # Pyspark
 def pySpark():
@@ -72,26 +70,9 @@ def pySpark():
     except Exception as error:
         logging.error(error)
 
-def exportarDatos(DF):
-    try:
-        DF.toJSON().first()
-        # Ruta de escritura
-        #DF.coalesce(1).writeStream.format("json").option("header", "false").save("database/dataset/output/dataFrame.json")
-
-        # # Bueno
-        # (DF.writeStream
-        #     .outputMode("append")
-        #     .format("json")
-        #     .option("path", "database\dataset\output")
-        #     .option("checkpointLocation", "database\dataset\output\\basura")
-        #     .start())
-            
-        # df_spark.writeStream \
-        #     .option('path', 'C:/Users/iabd/Desktop/Grado/Tweets-iabd/database/dataset/output') \
-        #     .option('checkpointLocation', 'database/dataset/temp') \
-        #     .start()
-    except Exception as error:
-        logging.error(error)
+def subirMongo(DF):
+    context = dbContext()
+    dbContext.importFile(DF.toJSON().first())
     
 def subirHDFS(DF):
     try:
@@ -116,7 +97,7 @@ def subirHDFS(DF):
     
 def main():
     DF = pySpark()
-    exportarDatos(DF)
+    subirMongo(DF)
     # subirHDFS(DF)
     
 if __name__ == '__main__':
