@@ -80,7 +80,7 @@ def write_row_to_mongo(batch_df):
     try:
         print("\n\n\n\n\n", batch_df.toJSON().collect())
         print("\n\n\n\n\n", json.dumps(batch_df.toJSON().collect()))
-        print("\n\n\n\n\n", batch_df.toJSON().map(lambda j: json.loads(j)).collect())
+        # print("\n\n\n\n\n", batch_df.toJSON().map(lambda j: json.loads(j)).collect())
         
         
         context = dbContext()
