@@ -1,7 +1,7 @@
 from database.dbContext import *
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, BooleanType
-from pyspark.sql.functions import col, struct
+from pyspark.sql.functions import collect_set, first
 from hdfs import InsecureClient
 import json
 
@@ -50,10 +50,9 @@ def pySpark():
             .schema(schema)
             .load('database/dataset/input')
         )
-        structuredDF = DF.withColumnRenamed("lang","tweet_lang").select("tweet_lang","user.*","entities.*")
-        
+        groupedDF = DF.groupBy("user.id_str").agg(collect_set("lang").alias("tweets_lang"), first("user").alias("user"), collect_set("entities").alias("entities")).select("tweets_lang","user.*","entities.*")
         # Devolver el DataFrame
-        pandasDf = structuredDF.toPandas()
+        pandasDf = groupedDF.toPandas()
         json_data = pandasDf.to_dict('records')
         return json.dumps(json_data)
     except Exception as error:
