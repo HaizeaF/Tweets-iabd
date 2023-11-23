@@ -1,6 +1,6 @@
 from database.dbContext import *
 from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType, BooleanType
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, BooleanType, ArrayType
 from pyspark.sql.functions import collect_set, first
 from hdfs import InsecureClient
 import json
@@ -37,9 +37,10 @@ def pySpark():
                 StructField("default_profile_image", BooleanType(), True)
             ]), True),
             StructField("entities", StructType([
-                    StructField("user_mentions", StructType([
-                            StructField("screen_name", StringType(), True)
-                        ]),True)
+                    StructField("user_mentions", ArrayType(
+                                StructType([
+                                    StructField("screen_name", StringType(), True)
+                                ]), True), True)
                 ]), True)
             ])
         
@@ -50,7 +51,7 @@ def pySpark():
             .schema(schema)
             .load('database/dataset/input')
         )
-        groupedDF = DF.groupBy("user.id_str").agg(collect_set("lang").alias("tweets_lang"), first("user").alias("user"), collect_set("entities").alias("entities")).select("tweets_lang","user.*","entities.*")
+        groupedDF = DF.groupBy("user.id_str").agg(collect_set("lang").alias("tweets_lang"), first("user").alias("user"), collect_set("entities.user_mentions").alias("mentioned_users")).select("tweets_lang","user.*","mentioned_users")
         # Devolver el DataFrame
         pandasDf = groupedDF.toPandas()
         json_data = pandasDf.to_dict('records')
@@ -78,6 +79,7 @@ def subirHDFS(DF):
         #     hdfsClient.writeStream(path_archivo_hdfs, archivo_local)
     except Exception as error:
         logging.error(error)
+    
     
 def main():
     DF = pySpark()
