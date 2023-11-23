@@ -97,10 +97,14 @@ def subirHDFS(DF):
     
     
 def main():
+    # Leer datos y crear DataFrame
     DF = pySpark()
+    
     # Importar DataFrame
     context = dbContext()
     context.importFile(DF)
+    
+    # Subir a HDFS
     # subirHDFS(DF)
     
 if __name__ == '__main__':
