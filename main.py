@@ -37,21 +37,36 @@ def pySpark():
                 StructField("default_profile_image", BooleanType(), True)
             ]), True),
             StructField("entities", StructType([
-                    StructField("user_mentions", ArrayType(
-                                StructType([
-                                    StructField("screen_name", StringType(), True)
-                                ]), True), True)
-                ]), True)
-            ])
+                StructField("user_mentions", ArrayType(
+                    StructType([
+                        StructField("screen_name", StringType(), True)
+                    ]), True), 
+                True)
+            ]), True)
+        ])
         
-        # Crear un DataFrame leyendolos datos en streaming con el esquema y directorio definido
-        DF = (
+        # Crear un DataFrame leyendo los datos en streaming con el esquema y directorio definido
+        sparkDF = (
             spark.read
             .format('json')
             .schema(schema)
             .load('database/dataset/input')
         )
-        groupedDF = DF.groupBy("user.id_str").agg(collect_set("lang").alias("tweets_lang"), first("user").alias("user"), collect_set("entities.user_mentions").alias("mentioned_users")).select("tweets_lang","user.*","mentioned_users")
+        
+        # # Crear un DataFrame leyendo los datos desde socket
+        # sparkDF = (
+        # spark.readStream.format("socket")
+        #     .option("host", "localhost")
+        #     .option("port", 123456)
+        #     .load())
+        # sparkDF = sparkDF.select(functions.from_json(sparkDF.value, schema).alias("data")).select("data.*")
+        
+        groupedDF = (sparkDF.groupBy("user.id_str")
+                        .agg(collect_set("lang")
+                        .alias("tweets_lang"), first("user")
+                        .alias("user"), collect_set("entities.user_mentions")
+                        .alias("mentioned_users")).select("tweets_lang","user.*","mentioned_users"))
+        
         # Devolver el DataFrame
         pandasDf = groupedDF.toPandas()
         json_data = pandasDf.to_dict('records')
@@ -83,6 +98,7 @@ def subirHDFS(DF):
     
 def main():
     DF = pySpark()
+    # Importar DataFrame
     context = dbContext()
     context.importFile(DF)
     # subirHDFS(DF)
