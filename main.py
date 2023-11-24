@@ -21,8 +21,6 @@ def pySpark():
             StructField("lang", StringType(), True),
             StructField("user", StructType([
                 StructField("id_str", StringType(), True),
-                StructField("name", StringType(), True),
-                StructField("screen_name", StringType(), True),
                 StructField("location", StringType(), True),
                 StructField("url", StringType(), True),
                 StructField("description", StringType(), True),
