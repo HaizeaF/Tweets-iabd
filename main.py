@@ -26,7 +26,6 @@ def pySpark():
                 StructField("location", StringType(), True),
                 StructField("url", StringType(), True),
                 StructField("description", StringType(), True),
-                StructField("protected", BooleanType(), True),
                 StructField("followers_count", IntegerType(), True),
                 StructField("friends_count", IntegerType(), True),
                 StructField("created_at", StringType(), True),
@@ -75,7 +74,7 @@ def pySpark():
 
         groupedDF = hashtagsDF.join(userDF, hashtagsDF["id_str"] == userDF["id_str"], "inner")
         groupedDF = groupedDF.drop(userDF["id_str"])
-        
+
         # Devolver el DataFrame
         pandasDf = groupedDF.toPandas()
         pandasDf.to_csv("cleanedTweets.csv",index=False)
