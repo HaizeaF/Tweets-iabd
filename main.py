@@ -74,7 +74,7 @@ def pySpark():
         groupedDF = groupedDF.drop(userDF["id_str"])
 
         # Devolver el DataFrame
-        pandasDf = groupedDF.toPandas()
+        pandasDf = groupedDF.where((groupedDF.statuses_count > -1) & (groupedDF.followers_count > -1) & (groupedDF.friends_count > -1)).toPandas()
         pandasDf.to_csv("cleanedTweets.csv",index=False)
         json_data = pandasDf.to_dict('records')
         return json.dumps(json_data)
