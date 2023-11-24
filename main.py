@@ -1,7 +1,7 @@
 from database.dbContext import *
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, BooleanType, ArrayType
-from pyspark.sql.functions import collect_set, first
+from pyspark.sql.functions import collect_set, first, explode
 from hdfs import InsecureClient
 import json
 
@@ -37,9 +37,9 @@ def pySpark():
                 StructField("default_profile_image", BooleanType(), True)
             ]), True),
             StructField("entities", StructType([
-                StructField("user_mentions", ArrayType(
+                StructField("hashtags", ArrayType(
                     StructType([
-                        StructField("screen_name", StringType(), True)
+                        StructField("text", StringType(), True)
                     ]), True), 
                 True)
             ]), True)
@@ -61,14 +61,23 @@ def pySpark():
         #     .load())
         # sparkDF = sparkDF.select(functions.from_json(sparkDF.value, schema).alias("data")).select("data.*")
         
-        groupedDF = (sparkDF.groupBy("user.id_str")
-                        .agg(collect_set("lang")
-                        .alias("tweets_lang"), first("user")
-                        .alias("user"), collect_set("entities.user_mentions")
-                        .alias("mentioned_users")).select("tweets_lang","user.*","mentioned_users"))
-        
+        hashtagsDF = (sparkDF.groupBy("user.id_str")
+                        .agg(explode(first("entities.hashtags")).alias("hashtags"))
+                        .select("id_str", "hashtags.text"))
+
+        hashtagsDF = (hashtagsDF.groupBy("id_str")
+                        .agg(collect_set("text").alias("hashtags"))
+                        .select("id_str","hashtags"))
+
+        userDF = (sparkDF.groupBy("user.id_str")
+                        .agg(collect_set("lang").alias("tweets_lang"), first("user").alias("user"))
+                        .select("tweets_lang", "user.*"))
+
+        groupedDF = hashtagsDF.join(userDF, hashtagsDF["id_str"] == userDF["id_str"], "inner")
+
         # Devolver el DataFrame
         pandasDf = groupedDF.toPandas()
+        pandasDf.to_csv("cleanedTweets.csv",index=False)
         json_data = pandasDf.to_dict('records')
         return json.dumps(json_data)
     except Exception as error:
