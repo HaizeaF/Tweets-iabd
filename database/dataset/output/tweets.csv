@@ -1,0 +1,4 @@
+tweets_lang,id_str,name,screen_name,location,url,description,protected,followers_count,friends_count,created_at,verified,statuses_count,lang,default_profile,default_profile_image,mentioned_users
+['en'],391820171,ka(nal)tie,narrychristmas_,l0/5er club y a y ,http://k4y-tee.tumblr.com/,hashtag no #1DTwerkTeam2012 ,False,269,324,Sun Oct 16 04:37:03 +0000 2011,False,14294,en,False,False,[[Row(screen_name='halluzaynating')]]
+['en'],27703934,Washington Examiner,washexaminer,Washington DC,http://www.washingtonexaminer.com,,False,1995,67,Mon Mar 30 18:56:55 +0000 2009,False,42208,en,False,False,[[]]
+['pl'],457546132,Nicole S. ☮,nicolehoran08,At the end of the rainbow ;),http://evermors.tumblr.com,Proud Directioner. Smile :) Captain Potatooo! ♥ I love One Direction!,False,120,230,Sat Jan 07 14:55:00 +0000 2012,False,3251,en,False,False,[[Row(screen_name='hii1d')]]

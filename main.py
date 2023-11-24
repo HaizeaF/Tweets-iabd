@@ -69,43 +69,38 @@ def pySpark():
         
         # Devolver el DataFrame
         pandasDf = groupedDF.toPandas()
+        pandasDf.to_csv("database\dataset\output\\tweets.csv", index=False)
         json_data = pandasDf.to_dict('records')
         return json.dumps(json_data)
     except Exception as error:
         logging.error(error)
     
-def subirHDFS(DF):
+def subirHDFS():
     try:
         # Instancia de HDFS, ruta http y usuario
-        hdfsClient = InsecureClient('http://localhost:50075', user='raj_ops')
+        hdfsClient = InsecureClient('http://localhost:50070', user='raj_ops')
         
         # Ruta de archivo hdfs
-        path_archivo_hdfs = '/user/raj_ops/prueba.txt'
+        path_archivo_hdfs = '/user/raj_ops/tweets.csv'
+        path_archivo_local = 'database\dataset\output\\tweets.csv'
         
-        # hdfsClient.upload(path_archivo_hdfs, path_archivo_local)
-        # Escritura de archivo en HDFS
-        DF.writeStream \
-            .outputMode('complete') \
-            .option('checkpointLocation', path_archivo_hdfs) \
-            .format('memory') \
-            .start()
-        
-        # with open(path_archivo_local, 'rb') as archivo_local:
-        #     hdfsClient.writeStream(path_archivo_hdfs, archivo_local)
+        # Subir archivo a HDFS
+        with open(path_archivo_local, 'rb') as archivo_local:
+            hdfsClient.write(path_archivo_hdfs, archivo_local)
     except Exception as error:
         logging.error(error)
     
     
 def main():
     # Leer datos y crear DataFrame
-    DF = pySpark()
+    json = pySpark()
     
     # Importar DataFrame
     context = dbContext()
-    context.importFile(DF)
+    context.importFile(json, ":P", ":P")
     
     # Subir a HDFS
-    # subirHDFS(DF)
+    subirHDFS()
     
 if __name__ == '__main__':
     main()
