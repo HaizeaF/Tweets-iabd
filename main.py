@@ -69,6 +69,8 @@ def pySpark():
         
         # Devolver el DataFrame
         pandasDf = groupedDF.toPandas()
+        
+        # Crear archivo csv
         pandasDf.to_csv("database\dataset\output\\tweets.csv", index=False)
         json_data = pandasDf.to_dict('records')
         return json.dumps(json_data)
