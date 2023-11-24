@@ -74,7 +74,8 @@ def pySpark():
                         .select("tweets_lang", "user.*"))
 
         groupedDF = hashtagsDF.join(userDF, hashtagsDF["id_str"] == userDF["id_str"], "inner")
-
+        groupedDF = groupedDF.drop(userDF["id_str"])
+        
         # Devolver el DataFrame
         pandasDf = groupedDF.toPandas()
         pandasDf.to_csv("cleanedTweets.csv",index=False)
