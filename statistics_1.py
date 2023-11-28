@@ -1,7 +1,10 @@
 import json
+import logging
 import numpy as np
 import pandas as pd
 from datetime import datetime
+from hdfs import InsecureClient
+
 
 # Carga los tweets desde el archivo JSON
 tweets = json.loads(open("tweets.json", "r").read())
@@ -17,7 +20,7 @@ estadisticas = []
 hora_mas_frecuente_por_idioma = []
 user_lang_counts = []
 
-with open("estadisticas.json", "w") as f:
+with open("database/dataset/output/estadisticas.json", "w") as f:
     f.write("[")  # Agregar corchete de apertura para iniciar una lista de diccionarios
 
     for i, (lang, df) in enumerate(idiomas):
@@ -58,4 +61,17 @@ with open("estadisticas.json", "w") as f:
 
 print("terminado")
 
-
+try:
+    # Instancia de HDFS, ruta http y usuario
+    hdfsClient = InsecureClient('http://localhost:50070', user='raj_ops')
+    
+    # Ruta de archivo hdfs
+    path_archivo_hdfs = '/user/raj_ops/estadisticas.json'
+    path_archivo_local = 'database/dataset/output/estadisticas.json'
+    
+    # Subir archivo a HDFS
+    with open(path_archivo_local, 'rb') as archivo_local:
+        hdfsClient.write(path_archivo_hdfs, archivo_local)
+except Exception as error:
+    logging.error(error)
+    #print("error")
