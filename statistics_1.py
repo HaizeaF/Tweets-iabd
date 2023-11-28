@@ -34,18 +34,20 @@ with open("estadisticas.json", "w") as f:
         # Calcula el porcentaje de tweets para el idioma actual
         porcentaje_tweets = len(df) / numF * 100
 
-        # Cuenta las ocurrencias de cada "user.lang"
-        user_lang_count = df["user"].apply(lambda x: x["lang"]).value_counts().head(5).index.tolist()
+        # Cuenta las ocurrencias de cada "user.lang" y calcula el porcentaje
+        user_lang_count = df["user"].apply(lambda x: x["lang"]).value_counts().head(5)
+        user_lang_percentage = (user_lang_count / len(df)) * 100
 
         # Escribir el diccionario actual y agregar una coma si no es el último
         f.write("{\n")
         f.write(f'"idioma": "{lang}",\n')
         f.write(f'"porcentaje_tweets": "{porcentaje_tweets:.2f}%",\n')
-        f.write(f'"media": {med},\n')
-        f.write(f'"mediana": {mediana},\n')
-        f.write(f'"desviacion": {des},\n')
+        f.write(f'"media": {med:.2f},\n')
+        f.write(f'"mediana": {mediana:.2f},\n')
+        f.write(f'"desviacion": {des:.2f},\n')
         f.write(f'"hora_mas_frecuente": {hora_mas_frecuente},\n')
-        f.write(f'"lenguaje_usuario": {json.dumps(user_lang_count)}\n')
+        f.write(f'"lenguaje_usuario": {json.dumps({lang: f"{value:.2f}%" for lang, value in user_lang_percentage.to_dict().items()}, ensure_ascii=False)}\n')
+
         f.write("}")
 
         # Si no es el último elemento, agregar una coma
@@ -55,6 +57,5 @@ with open("estadisticas.json", "w") as f:
     f.write("]")  # Agregar corchete de cierre para finalizar la lista de diccionarios
 
 print("terminado")
-print(numF)
 
 
