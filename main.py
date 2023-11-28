@@ -22,7 +22,6 @@ def pySpark():
             StructField("user", StructType([
                 StructField("id_str", StringType(), True),
                 StructField("location", StringType(), True),
-                StructField("url", StringType(), True),
                 StructField("description", StringType(), True),
                 StructField("followers_count", IntegerType(), True),
                 StructField("friends_count", IntegerType(), True),
@@ -74,7 +73,7 @@ def pySpark():
         groupedDF = groupedDF.drop(userDF["id_str"])
 
         # Devolver el DataFrame
-        pandasDf = groupedDF.where((groupedDF.statuses_count > -1) & (groupedDF.followers_count > -1) & (groupedDF.friends_count > -1)).toPandas()
+        pandasDf = groupedDF.where((groupedDF.statuses_count > -1) | (groupedDF.followers_count > -1) | (groupedDF.friends_count > -1)).toPandas()
         pandasDf.to_csv("database\dataset\output\\tweets.csv", index=False)
         json_data = pandasDf.to_dict('records')
         return json.dumps(json_data)
@@ -99,14 +98,14 @@ def subirHDFS():
     
 def main():
     # Leer datos y crear DataFrame
-    json = pySpark()
+    # json = pySpark()
     
     # Importar DataFrame
     context = dbContext()
-    context.importFile(json, ":P", ":P")
-    
+    # context.importFile(json, ":P", ":P")
+    context.exportFile()
     # Subir a HDFS
-    subirHDFS()
+    # subirHDFS()
     
 if __name__ == '__main__':
     main()
