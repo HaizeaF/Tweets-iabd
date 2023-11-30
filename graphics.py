@@ -2,7 +2,7 @@ import json
 import matplotlib.pyplot as plt
 
 # Cargar los datos desde el archivo JSON
-with open("estadisticas.json", "r") as f:
+with open("database\dataset\output\estadisticas.json", "r") as f:
     data = json.load(f)
 
 def usoIdiomas(data):
@@ -63,8 +63,6 @@ def distribucion_en(data):
     # Mostrar el gráfico
     plt.show()
 
-
-
 def distribucion_es(data):
     ingles = next(dato for dato in data if dato["idioma"] == "es")
     lenguaje_usuario_ingles = ingles["lenguaje_usuario"]
@@ -122,11 +120,7 @@ def longIdioma(data):
     # Mostrar el gráfico
     plt.show()
 
-
 usoIdiomas(data)
 longIdioma(data)
 distribucion_en(data)
 distribucion_es(data)
-
-
-

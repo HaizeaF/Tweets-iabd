@@ -5,9 +5,8 @@ import pandas as pd
 from datetime import datetime
 from hdfs import InsecureClient
 
-
 # Carga los tweets desde el archivo JSON
-tweets = json.loads(open("tweets.json", "r").read())
+tweets = json.loads(open("database/dataset/input/tweets.json", "r").read())
 df = pd.DataFrame(tweets)
 numF = df.shape[0]
 grouped = df.groupby(df.lang)
@@ -50,7 +49,6 @@ with open("database/dataset/output/estadisticas.json", "w") as f:
         f.write(f'"desviacion": {des:.2f},\n')
         f.write(f'"hora_mas_frecuente": {hora_mas_frecuente},\n')
         f.write(f'"lenguaje_usuario": {json.dumps({lang: f"{value:.2f}%" for lang, value in user_lang_percentage.to_dict().items()}, ensure_ascii=False)}\n')
-
         f.write("}")
 
         # Si no es el último elemento, agregar una coma
@@ -59,14 +57,12 @@ with open("database/dataset/output/estadisticas.json", "w") as f:
 
     f.write("]")  # Agregar corchete de cierre para finalizar la lista de diccionarios
 
-print("terminado")
-
 try:
     # Instancia de HDFS, ruta http y usuario
     hdfsClient = InsecureClient('http://localhost:50070', user='raj_ops')
     
     # Ruta de archivo hdfs
-    path_archivo_hdfs = '/user/raj_ops/estadisticas.json'
+    path_archivo_hdfs = '/user/raj_ops/Reto-2-Tweets/estadisticas.json'
     path_archivo_local = 'database/dataset/output/estadisticas.json'
     
     # Subir archivo a HDFS
@@ -74,7 +70,3 @@ try:
         hdfsClient.write(path_archivo_hdfs, archivo_local)
 except Exception as error:
     logging.error(error)
-    #print("error")
-
-
-

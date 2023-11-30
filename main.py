@@ -86,7 +86,7 @@ def subirHDFS():
         hdfsClient = InsecureClient('http://localhost:50070', user='raj_ops')
         
         # Ruta de archivo hdfs
-        path_archivo_hdfs = '/user/raj_ops/tweets.csv'
+        path_archivo_hdfs = '/user/raj_ops/Reto-2-Tweets/tweets.csv'
         path_archivo_local = 'database\dataset\output\\tweets.csv'
         
         # Subir archivo a HDFS
@@ -98,14 +98,14 @@ def subirHDFS():
     
 def main():
     # Leer datos y crear DataFrame
-    # json = pySpark()
+    json = pySpark()
     
     # Importar DataFrame
     context = dbContext()
-    # context.importFile(json, ":P", ":P")
-    context.exportFile()
+    context.importFile(json)
+    
     # Subir a HDFS
-    # subirHDFS()
+    subirHDFS()
     
 if __name__ == '__main__':
     main()
