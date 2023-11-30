@@ -57,6 +57,23 @@ class dbContext:
             logging.error(error)
             self.server.stop()
 
+    def exportFile(self, dbname='tweetsRetoDb', collection='tweets'):
+        try:
+            self.openConnection()
+            db = self.client[dbname]
+            collection = db[collection]
+            self.client.admin.command('ping')
+            logging.info("Pinged your deployment. You successfully connected to MongoDB!")
+            documents = collection.find({})        
+            list_cur = list(documents)
+            json_data = dumps(list_cur, indent=2)
+            with open('database/dataset/output/mongoTweets.json', 'w') as file: 
+                file.write(json_data)  
+            self.server.stop()
+        except Exception as error:
+            logging.error(error)
+            self.server.stop()
+
     def dbReach(self):
         try:
             self.openConnection()

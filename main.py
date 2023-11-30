@@ -103,6 +103,7 @@ def main():
     # Importar DataFrame
     context = dbContext()
     context.importFile(json)
+    context.exportFile()
     
     # Subir a HDFS
     subirHDFS()
