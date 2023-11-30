@@ -1,0 +1,289 @@
+[{
+"idioma": "ar",
+"porcentaje_tweets": "0.58%",
+"media": 98.17,
+"mediana": 101.00,
+"desviacion": 32.03,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"ar": "51.62%", "en": "47.54%", "fr": "0.34%", "no": "0.13%", "nl": "0.13%"}
+},{
+"idioma": "bg",
+"porcentaje_tweets": "0.01%",
+"media": 65.84,
+"mediana": 56.00,
+"desviacion": 24.98,
+"hora_mas_frecuente": 2,
+"lenguaje_usuario": {"en": "50.00%", "ru": "42.86%", "pt": "5.36%", "es": "1.79%"}
+},{
+"idioma": "da",
+"porcentaje_tweets": "0.30%",
+"media": 61.78,
+"mediana": 55.00,
+"desviacion": 31.82,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "77.06%", "es": "7.99%", "pt": "6.52%", "fr": "1.73%", "no": "1.47%"}
+},{
+"idioma": "de",
+"porcentaje_tweets": "0.76%",
+"media": 73.75,
+"mediana": 66.00,
+"desviacion": 38.39,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "68.12%", "de": "11.18%", "pt": "7.23%", "es": "6.82%", "fr": "3.18%"}
+},{
+"idioma": "el",
+"porcentaje_tweets": "0.02%",
+"media": 104.19,
+"mediana": 108.50,
+"desviacion": 24.93,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "63.27%", "el": "30.61%", "es": "2.04%", "de": "2.04%", "ar": "1.02%"}
+},{
+"idioma": "en",
+"porcentaje_tweets": "69.12%",
+"media": 95.83,
+"mediana": 99.00,
+"desviacion": 36.41,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "93.97%", "es": "2.31%", "pt": "1.25%", "fr": "0.53%", "id": "0.32%"}
+},{
+"idioma": "es",
+"porcentaje_tweets": "9.00%",
+"media": 91.02,
+"mediana": 90.00,
+"desviacion": 34.13,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"es": "83.60%", "en": "12.64%", "pt": "3.03%", "fr": "0.25%", "ca": "0.17%"}
+},{
+"idioma": "fa",
+"porcentaje_tweets": "0.03%",
+"media": 108.78,
+"mediana": 110.00,
+"desviacion": 28.95,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "70.51%", "sv": "15.38%", "fa": "11.54%", "ar": "1.92%", "ja": "0.64%"}
+},{
+"idioma": "fi",
+"porcentaje_tweets": "0.13%",
+"media": 43.70,
+"mediana": 36.00,
+"desviacion": 23.76,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "53.25%", "pt": "20.42%", "es": "19.67%", "id": "2.12%", "it": "1.21%"}
+},{
+"idioma": "fr",
+"porcentaje_tweets": "0.68%",
+"media": 74.91,
+"mediana": 64.00,
+"desviacion": 35.95,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"fr": "48.98%", "en": "28.88%", "pt": "12.12%", "es": "8.61%", "it": "0.46%"}
+},{
+"idioma": "he",
+"porcentaje_tweets": "0.00%",
+"media": 87.08,
+"mediana": 87.00,
+"desviacion": 4.86,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "61.54%", "pt": "23.08%", "he": "15.38%"}
+},{
+"idioma": "hi",
+"porcentaje_tweets": "0.00%",
+"media": 102.33,
+"mediana": 101.00,
+"desviacion": 8.22,
+"hora_mas_frecuente": 2,
+"lenguaje_usuario": {"en": "100.00%"}
+},{
+"idioma": "hu",
+"porcentaje_tweets": "0.03%",
+"media": 41.33,
+"mediana": 36.00,
+"desviacion": 21.21,
+"hora_mas_frecuente": 1,
+"lenguaje_usuario": {"en": "52.33%", "pt": "19.77%", "es": "19.19%", "hu": "2.91%", "fr": "2.33%"}
+},{
+"idioma": "id",
+"porcentaje_tweets": "3.04%",
+"media": 91.27,
+"mediana": 95.50,
+"desviacion": 39.66,
+"hora_mas_frecuente": 2,
+"lenguaje_usuario": {"en": "71.96%", "id": "14.32%", "es": "6.99%", "pt": "5.02%", "fr": "0.52%"}
+},{
+"idioma": "is",
+"porcentaje_tweets": "0.17%",
+"media": 54.64,
+"mediana": 46.00,
+"desviacion": 32.25,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "61.63%", "pt": "16.98%", "es": "14.07%", "it": "1.86%", "fr": "1.74%"}
+},{
+"idioma": "it",
+"porcentaje_tweets": "0.90%",
+"media": 70.92,
+"mediana": 59.00,
+"desviacion": 33.84,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "41.90%", "es": "19.65%", "pt": "19.28%", "it": "15.49%", "fr": "1.51%"}
+},{
+"idioma": "ja",
+"porcentaje_tweets": "0.73%",
+"media": 95.17,
+"mediana": 95.00,
+"desviacion": 33.76,
+"hora_mas_frecuente": 2,
+"lenguaje_usuario": {"ja": "86.29%", "en": "12.25%", "zh-cn": "0.45%", "es": "0.37%", "ko": "0.16%"}
+},{
+"idioma": "km",
+"porcentaje_tweets": "0.00%",
+"media": 83.50,
+"mediana": 83.50,
+"desviacion": 11.50,
+"hora_mas_frecuente": 0,
+"lenguaje_usuario": {"en": "100.00%"}
+},{
+"idioma": "ko",
+"porcentaje_tweets": "0.69%",
+"media": 111.80,
+"mediana": 129.00,
+"desviacion": 32.03,
+"hora_mas_frecuente": 2,
+"lenguaje_usuario": {"ko": "71.20%", "en": "25.58%", "ja": "1.34%", "id": "0.62%", "es": "0.42%"}
+},{
+"idioma": "lt",
+"porcentaje_tweets": "0.33%",
+"media": 58.73,
+"mediana": 50.00,
+"desviacion": 31.21,
+"hora_mas_frecuente": 1,
+"lenguaje_usuario": {"en": "64.37%", "pt": "14.37%", "es": "13.21%", "id": "3.07%", "fr": "1.56%"}
+},{
+"idioma": "ml",
+"porcentaje_tweets": "0.00%",
+"media": 112.00,
+"mediana": 112.00,
+"desviacion": 0.00,
+"hora_mas_frecuente": 2,
+"lenguaje_usuario": {"en": "100.00%"}
+},{
+"idioma": "ne",
+"porcentaje_tweets": "0.00%",
+"media": 102.83,
+"mediana": 100.50,
+"desviacion": 28.93,
+"hora_mas_frecuente": 2,
+"lenguaje_usuario": {"en": "100.00%"}
+},{
+"idioma": "nl",
+"porcentaje_tweets": "1.12%",
+"media": 56.70,
+"mediana": 50.00,
+"desviacion": 30.24,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "73.01%", "nl": "10.44%", "pt": "7.46%", "es": "6.02%", "fr": "1.66%"}
+},{
+"idioma": "no",
+"porcentaje_tweets": "0.11%",
+"media": 67.29,
+"mediana": 59.00,
+"desviacion": 35.22,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "65.88%", "no": "21.30%", "es": "6.68%", "pt": "1.81%", "fr": "1.08%"}
+},{
+"idioma": "pl",
+"porcentaje_tweets": "0.57%",
+"media": 60.30,
+"mediana": 51.00,
+"desviacion": 33.83,
+"hora_mas_frecuente": 1,
+"lenguaje_usuario": {"en": "70.64%", "es": "11.28%", "pt": "8.26%", "id": "3.49%", "pl": "2.47%"}
+},{
+"idioma": "pt",
+"porcentaje_tweets": "5.98%",
+"media": 74.83,
+"mediana": 69.00,
+"desviacion": 33.37,
+"hora_mas_frecuente": 1,
+"lenguaje_usuario": {"pt": "66.44%", "en": "26.52%", "es": "6.33%", "fr": "0.25%", "it": "0.14%"}
+},{
+"idioma": "ru",
+"porcentaje_tweets": "0.12%",
+"media": 68.11,
+"mediana": 62.00,
+"desviacion": 26.19,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"ru": "75.77%", "en": "23.59%", "es": "0.16%", "pt": "0.16%", "fr": "0.16%"}
+},{
+"idioma": "sv",
+"porcentaje_tweets": "0.87%",
+"media": 66.24,
+"mediana": 55.00,
+"desviacion": 38.36,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "70.02%", "pt": "9.10%", "sv": "8.99%", "es": "6.66%", "fr": "2.97%"}
+},{
+"idioma": "ta",
+"porcentaje_tweets": "0.00%",
+"media": 103.25,
+"mediana": 100.50,
+"desviacion": 17.50,
+"hora_mas_frecuente": 1,
+"lenguaje_usuario": {"en": "100.00%"}
+},{
+"idioma": "th",
+"porcentaje_tweets": "0.07%",
+"media": 86.15,
+"mediana": 83.50,
+"desviacion": 33.43,
+"hora_mas_frecuente": 2,
+"lenguaje_usuario": {"en": "80.00%", "th": "20.00%"}
+},{
+"idioma": "tl",
+"porcentaje_tweets": "0.39%",
+"media": 68.02,
+"mediana": 59.00,
+"desviacion": 35.97,
+"hora_mas_frecuente": 1,
+"lenguaje_usuario": {"en": "74.43%", "es": "8.64%", "id": "7.54%", "pt": "6.79%", "fr": "0.95%"}
+},{
+"idioma": "tr",
+"porcentaje_tweets": "1.13%",
+"media": 56.14,
+"mediana": 46.00,
+"desviacion": 28.69,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "49.02%", "pt": "21.88%", "tr": "12.44%", "es": "11.76%", "id": "1.68%"}
+},{
+"idioma": "und",
+"porcentaje_tweets": "2.51%",
+"media": 26.42,
+"mediana": 20.00,
+"desviacion": 12.18,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "50.65%", "pt": "32.62%", "es": "12.27%", "fr": "1.19%", "it": "0.63%"}
+},{
+"idioma": "ur",
+"porcentaje_tweets": "0.02%",
+"media": 103.38,
+"mediana": 101.00,
+"desviacion": 33.91,
+"hora_mas_frecuente": 1,
+"lenguaje_usuario": {"en": "85.86%", "ar": "13.13%", "ja": "1.01%"}
+},{
+"idioma": "vi",
+"porcentaje_tweets": "0.50%",
+"media": 55.31,
+"mediana": 48.00,
+"desviacion": 28.50,
+"hora_mas_frecuente": 23,
+"lenguaje_usuario": {"en": "65.57%", "pt": "16.85%", "es": "12.26%", "fr": "2.24%", "id": "0.62%"}
+},{
+"idioma": "zh",
+"porcentaje_tweets": "0.01%",
+"media": 88.16,
+"mediana": 82.00,
+"desviacion": 31.50,
+"hora_mas_frecuente": 1,
+"lenguaje_usuario": {"en": "45.90%", "zh-cn": "39.34%", "zh-tw": "6.56%", "es": "3.28%", "pt": "1.64%"}
+}]

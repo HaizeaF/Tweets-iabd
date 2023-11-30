@@ -3,6 +3,8 @@ from configparser import ConfigParser
 import pymongo
 import json
 import logging
+from bson.json_util import dumps
+from bson.json_util import loads
 
 class dbContext:
     def __init__(self):
@@ -35,7 +37,7 @@ class dbContext:
             logging.error(error)
             self.server.stop()
 
-    def importFile(self, filename='database\tweets.json', dbname='tweetsRetoDb', collection='tweets'):
+    def importFile(self, file=open('database/dataset/input/tweets.json'), dbname='tweetsRetoDb', collection='tweets'):
         try:
             self.openConnection()
             db = self.client[dbname]
@@ -43,8 +45,7 @@ class dbContext:
             self.client.admin.command('ping')
             logging.info("Pinged your deployment. You successfully connected to MongoDB!")
             
-            with open(filename) as file:
-                file_tweets = json.load(file)
+            file_tweets = (json.loads(file) if isinstance(file,str) else json.load(file))
             
             if isinstance(file_tweets, list):
                 collection.insert_many(file_tweets)
@@ -53,5 +54,15 @@ class dbContext:
                 
             self.server.stop()
         except Exception as error:
+            logging.error(error)
+            self.server.stop()
+
+    def dbReach(self):
+        try:
+            self.openConnection()
+            self.client.admin.command('ping')
+            logging.info("Ping reached the Virtual Machine")
+        except Exception as error:
+            logging.info("Ping did not reach the Virtual Machine")
             logging.error(error)
             self.server.stop()
